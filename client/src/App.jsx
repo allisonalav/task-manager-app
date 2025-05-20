@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+// ✅ Use your Render backend URL here
 const API_BASE = 'https://task-manager-backend-mzwj.onrender.com';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
 
   // Add new task
   const handleAdd = async () => {
+    if (!text.trim()) return;
     const res = await fetch(`${API_BASE}/tasks`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
