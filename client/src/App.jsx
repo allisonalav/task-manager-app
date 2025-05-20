@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
 
+const API_BASE = 'https://task-manager-backend-mzwj.onrender.com';
+
 function App() {
   const [tasks, setTasks] = useState([]);
   const [text, setText] = useState('');
 
   // Fetch tasks on mount
   useEffect(() => {
-    fetch('http://localhost:3001/tasks')
+    fetch(`${API_BASE}/tasks`)
       .then(res => res.json())
       .then(data => setTasks(data));
   }, []);
 
   // Add new task
   const handleAdd = async () => {
-    const res = await fetch('http://localhost:3001/tasks', {
+    const res = await fetch(`${API_BASE}/tasks`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text }),
@@ -25,7 +27,7 @@ function App() {
 
   // Toggle complete
   const handleToggle = async (id) => {
-    const res = await fetch(`http://localhost:3001/tasks/${id}`, {
+    const res = await fetch(`${API_BASE}/tasks/${id}`, {
       method: 'PUT',
     });
     const updatedTask = await res.json();
@@ -34,7 +36,7 @@ function App() {
 
   // Delete task
   const handleDelete = async (id) => {
-    await fetch(`http://localhost:3001/tasks/${id}`, { method: 'DELETE' });
+    await fetch(`${API_BASE}/tasks/${id}`, { method: 'DELETE' });
     setTasks(tasks.filter(t => t.id !== id));
   };
 
