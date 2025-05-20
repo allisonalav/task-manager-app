@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const supabase = require('./supabase'); // Make sure supabase.js is in the same folder
+const supabase = require('./supabaseClient');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
